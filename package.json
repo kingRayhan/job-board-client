@@ -9,13 +9,19 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.4.0",
+    "@tiptap/extension-bubble-menu": "^2.0.0-beta.55",
+    "@tiptap/starter-kit": "^2.0.0-beta.183",
+    "@tiptap/vue-3": "^2.0.0-beta.90",
     "@vueuse/core": "^7.6.2",
     "apisauce": "^2.1.5",
+    "filepond": "^4.30.3",
     "pinia": "^2.0.11",
     "vue": "^3.2.25",
+    "vue-filepond": "^7.0.2",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.2",
     "@vitejs/plugin-vue": "^2.2.0",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.6",

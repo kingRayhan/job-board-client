@@ -8,7 +8,7 @@
 
     <nav v-if="auth.loggedIn" class="flex items-center gap-4">
       <a class="text-base" href="#">My posts</a>
-      <a class="text-base button" href="#">
+      <router-link class="text-base button" :to="{ name: 'jobs-create' }">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="w-5 h-5"
@@ -22,7 +22,7 @@
           />
         </svg>
         <span>Post a job</span>
-      </a>
+      </router-link>
 
       <div class="relative flex gap-1">
         <button @click="isOpen = !isOpen">Hi, {{ auth.user.name }}</button>

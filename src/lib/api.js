@@ -1,4 +1,3 @@
-import useToken from "@/hooks/useToken";
 import { create } from "apisauce";
 
 const api = create({

@@ -2,23 +2,25 @@
   <div class="flex flex-col w-full">
     <label :for="name" class="capitalize">{{ name }}</label>
     <input
-      v-bind="$attrs"
       :name="name"
       @input="$emit('update:modelValue', $event.target.value)"
       :id="name"
+      type="text"
       class="w-full rounded-sm bg-slate-50"
+      v-bind="$attrs"
     />
 
-    <p :class="{ 'text-red-500': hasError }">{{ helperText }}</p>
+    <p v-if="helperText" :class="{ 'text-red-500': hasError }">
+      {{ helperText }}
+    </p>
   </div>
 </template>
 
 <script>
 export default {
   inheritAttrs: false,
-}
+};
 </script>
-
 
 <script setup>
 defineProps({
