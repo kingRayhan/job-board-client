@@ -6,6 +6,8 @@
 </template>
 
 <script setup>
+import { onMounted, watch } from "vue";
+
 const props = defineProps({
   modelValue: {
     type: String,
@@ -26,11 +28,25 @@ const editor = useEditor({
   extensions: [StarterKit],
   editorProps: {
     attributes: {
-      class: "prose prose-sm mx-auto focus:outline-none w-full max-w-none",
+      class: "typography mx-auto focus:outline-none w-full max-w-none",
     },
   },
   onUpdate: ({ editor }) => {
     $emit("update:modelValue", editor.getHTML());
   },
 });
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    console.log({ editor });
+    const isSame = editor.value.getHTML() === value;
+
+    if (isSame) {
+      return;
+    }
+
+    editor.value.commands.setContent(value, false);
+  }
+);
 </script>

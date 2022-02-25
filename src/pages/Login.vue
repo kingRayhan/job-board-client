@@ -29,8 +29,10 @@
 import { useRouter } from "vue-router";
 import useForm from "@/hooks/useForm";
 import { reactive } from "vue";
-import Input from "@/components/Input.vue";
-import AppButton from "@/components/AppButton.vue";
+
+import Input from "@/components/Form/Input.vue";
+import AppButton from "@/components/Form/AppButton.vue";
+
 import useAuthStore from "@/stores/auth";
 import useTokenStore from "@/stores/token";
 import api from "@/lib/api";
@@ -44,15 +46,12 @@ const form = reactive({
   password: "",
 });
 
-const { submit, getErrorMessage, response, loading } = useForm(
-  form,
-  "/api/auth/login"
-);
+const { submit, getErrorMessage, loading } = useForm();
 
 const token = useTokenStore();
 
 const handleSubmit = () => {
-  submit().then(async ({ token }) => {
+  submit(form, "/api/auth/login").then(async ({ token }) => {
     localStorage.setItem("token", token);
     api.setHeader("Authorization", `Bearer ${token}`);
     await auth.boot();

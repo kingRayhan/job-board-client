@@ -1,9 +1,24 @@
 <template>
   <div class="w-full">
+    <div
+      v-if="modelValue"
+      class="flex items-center justify-between p-3 border border-slate-700"
+    >
+      <div class="flex items-center gap-2">
+        <img class="w-10" :src="modelValue" alt="" />
+        <p>Company Logo</p>
+      </div>
+
+      <button type="button" @click="handleDelete" class="text-3xl text-red-500">
+        &times;
+      </button>
+    </div>
+
     <FilePond
+      v-if="!modelValue"
       name="file"
       :label-idle="label"
-      v-bind:allow-multiple="true"
+      v-bind:allow-multiple="false"
       accepted-file-types="image/jpeg, image/png"
       :server="serverConfig"
     />
@@ -15,8 +30,10 @@
 </template>
 
 <script setup>
+import api from "@/lib/api";
+
 const $emits = defineEmits(["update:modelValue"]);
-defineProps({
+const props = defineProps({
   modelValue: {
     type: String,
     default: "",
@@ -50,8 +67,13 @@ let serverConfig = {
     },
     withCredentials: false,
     onload: (response) => {
-      $emits("update:modelValue", JSON.parse(response).secure_url);
+      $emits("update:modelValue", JSON.parse(response).url);
     },
   },
+};
+
+const handleDelete = () => {
+  api.delete(`/api/uploads?url=${props.modelValue}`);
+  $emits("update:modelValue", "");
 };
 </script>

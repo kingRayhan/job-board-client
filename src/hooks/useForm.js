@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import api from "@/lib/api";
 
-const useForm = (payload, endpoint, method = "post") => {
+const useForm = () => {
   const errors = ref([]);
   const loading = ref(false);
 
@@ -9,7 +9,7 @@ const useForm = (payload, endpoint, method = "post") => {
     return errors.value[key]?.join(" ");
   };
 
-  const submit = () => {
+  const submit = (payload, endpoint, method = "post") => {
     errors.value = [];
     loading.value = true;
 

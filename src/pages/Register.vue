@@ -41,7 +41,7 @@
 import { useRouter } from "vue-router";
 import useForm from "@/hooks/useForm";
 import { reactive } from "vue";
-import Input from "@/components/Input.vue";
+import Input from "@/components/Form/Input.vue";
 const router = useRouter();
 
 const form = reactive({
@@ -51,13 +51,10 @@ const form = reactive({
   password_confirmation: "",
 });
 
-const { submit, getErrorMessage, response } = useForm(
-  form,
-  "/api/auth/register"
-);
+const { submit, getErrorMessage, response } = useForm();
 
 const handleSubmit = () => {
-  submit().then((response) => {
+  submit(form, "/api/auth/register").then((response) => {
     router.push({ name: "login" });
   });
 };

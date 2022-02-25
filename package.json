@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.4.0",
-    "@tiptap/extension-bubble-menu": "^2.0.0-beta.55",
     "@tiptap/starter-kit": "^2.0.0-beta.183",
     "@tiptap/vue-3": "^2.0.0-beta.90",
     "@vueuse/core": "^7.6.2",
@@ -18,6 +17,7 @@
     "pinia": "^2.0.11",
     "vue": "^3.2.25",
     "vue-filepond": "^7.0.2",
+    "vue-multiselect": "^3.0.0-alpha.2",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {

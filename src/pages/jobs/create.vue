@@ -24,6 +24,9 @@
         :helperText="getErrorMessage('location')"
         :hasError="Boolean(getErrorMessage('location'))"
       />
+
+      <JobTagInput name="Tags" v-model="form.tags" />
+
       <SelectInput
         name="Job Type"
         placeholder="Job location"
@@ -71,20 +74,19 @@
 
 <script setup>
 import Input from "@/components/Form/Input.vue";
+import JobTagInput from "@/components/JobTagInput.vue";
+
 import AppButton from "@/components/Form/AppButton.vue";
 import FileUploader from "@/components/Form/FileUploader.vue";
 import Editor from "@/components/Form/Editor.vue";
 import SelectInput from "@/components/Form/SelectInput.vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 
-import { reactive, onMounted, ref } from "vue";
+import { reactive, ref } from "vue";
 import useForm from "@/hooks/useForm";
 import api from "@/lib/api";
 const router = useRouter();
-const route = useRoute();
 
-const loading = ref(false);
-const job_id = ref(null);
 const form = reactive({
   title: "",
   location: "",
@@ -93,32 +95,16 @@ const form = reactive({
   company_name: "",
   company_logo: "",
   description: "",
-});
-
-onMounted(async () => {
-  loading.value = true;
-  const { ok, data } = await api.get(`/api/jobs/${route.params.slug}`);
-
-  if (ok) {
-    form.title = data.data.title;
-    form.location = data.data.location;
-    form.link = data.data.link;
-    form.type = data.data.type;
-    form.company_name = data.data.company.name;
-    form.company_logo = data.data.company.logo;
-    form.description = data.data.description;
-    job_id.value = data.data.id;
-  } else {
-    alert("Failed to load");
-  }
+  tags: [],
 });
 
 const { submit, getErrorMessage } = useForm();
 
 const handleSubmit = () => {
-  submit(form, `/api/jobs/${job_id.value}`, "put").then(({ data }) => {
-    // router.push({ name: "home" });
-    console.log(data);
+  let tags = form.tags.map((tag) => tag.value);
+
+  submit({ ...form, tags }, "/api/jobs").then(() => {
+    router.push({ name: "home" });
   });
 };
 </script>

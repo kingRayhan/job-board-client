@@ -1,6 +1,11 @@
 <template>
   <div class="flex flex-col gap-10">
-    <Job v-for="job in jobs" :key="job.id" :job="job" />
+    <Job
+      v-for="job in jobs"
+      :key="job.id"
+      :job="job"
+      @deleted="handleRemoveJob"
+    />
   </div>
 
   <div v-if="!jobs.length">
@@ -43,4 +48,8 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
     loadMore(pagination.page);
   }
 });
+
+const handleRemoveJob = (jobId) => {
+  jobs.value = jobs.value.filter((job) => job.id !== jobId);
+};
 </script>

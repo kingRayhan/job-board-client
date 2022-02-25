@@ -6,8 +6,9 @@ import NotFound from "./pages/NotFound.vue";
 import Settings from "./pages/Settings.vue";
 
 import JobLayout from "./components/jobs-layout.vue";
-import PostJob from "./pages/jobs/post-job.vue";
+import CreateJob from "./pages/jobs/create.vue";
 import UpdateJob from "./pages/jobs/update.vue";
+import JobDetails from "./pages/jobs/details.vue";
 
 import useAuthStore from "./stores/auth";
 
@@ -44,17 +45,23 @@ const routes = [
   {
     path: "/jobs",
     component: JobLayout,
-    meta: { auth: true },
     children: [
       {
         name: "jobs-create",
         path: "create",
-        component: PostJob,
+        component: CreateJob,
+        meta: { auth: true },
       },
       {
         name: "jobs-update",
-        path: "update/:id",
+        path: "update/:slug",
         component: UpdateJob,
+        meta: { auth: true },
+      },
+      {
+        name: "jobs-details",
+        path: ":slug",
+        component: JobDetails,
       },
     ],
   },

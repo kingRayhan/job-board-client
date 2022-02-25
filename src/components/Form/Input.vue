@@ -8,9 +8,10 @@
       type="text"
       class="w-full rounded-sm bg-slate-50"
       v-bind="$attrs"
+      :value="modelValue"
     />
 
-    <p v-if="helperText" :class="{ 'text-red-500': hasError }">
+    <p v-if="helperText" class="text-sm" :class="{ 'text-red-500': hasError }">
       {{ helperText }}
     </p>
   </div>
