@@ -60,7 +60,7 @@ const FilePond = vueFilePond();
 
 let serverConfig = {
   process: {
-    url: "http://localhost:8000/api/uploads",
+    url: import.meta.env.VITE_API_URL + "/api/uploads",
     method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),

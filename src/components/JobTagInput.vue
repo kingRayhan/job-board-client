@@ -82,3 +82,12 @@ const handleUpdateTags = (tags) => {
   $emit("update:modelValue", tags);
 };
 </script>
+
+<style>
+.multiselect__tag {
+  background-color: #6560ec;
+}
+.multiselect__tag-icon:after {
+  color: #fff;
+}
+</style>

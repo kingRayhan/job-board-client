@@ -1,7 +1,12 @@
 <template>
   <Job :job="job" :show_details_button="false" />
   <div class="max-w-3xl mx-auto mt-10">
-    <div v-html="job.description" class="typography"></div>
+    <div
+      v-if="job.description"
+      v-html="job.description"
+      class="typography"
+    ></div>
+    <p class="text-xl italic text-center text-slate-700">No description</p>
   </div>
 </template>
 

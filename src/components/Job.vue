@@ -48,9 +48,13 @@
         </div>
 
         <div class="flex gap-2 mt-2">
-          <a href="#" class="#"> #Laravel </a>
-          <a href="#" class="#"> #api-doc </a>
-          <a href="#" class="#"> #unit-test </a>
+          <router-link
+            :to="{ name: 'jobs-with-tags', params: { slug: tag.slug } }"
+            v-for="tag in job.tags"
+            :key="tag.id"
+          >
+            #{{ tag.name }}
+          </router-link>
         </div>
       </div>
 
@@ -58,6 +62,7 @@
         <slot name="action">
           <div class="flex gap-2 transition-opacity duration-200 opacity-100">
             <router-link
+              v-if="job.user.id === auth.user.id"
               :to="{ name: 'jobs-update', params: { slug: job.slug } }"
               class="inline-block px-3 py-2 font-bold text-indigo-400 bg-white border-2 border-indigo-400 rounded-lg hover:text-opacity-80"
             >

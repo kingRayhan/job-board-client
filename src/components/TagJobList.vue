@@ -27,8 +27,10 @@ import api from "@/lib/api";
 import SyncLoader from "vue-spinner/src/SyncLoader.vue";
 import Job from "@/components/Job.vue";
 import { reactive, ref } from "vue";
+import useAuthStore from "@/stores/auth";
+import { useRoute } from "vue-router";
 
-const loading = ref(false);
+const route = useRoute();
 
 // states
 const target = ref(null);
@@ -39,22 +41,23 @@ const pagination = reactive({
 });
 
 // load jobs
-const { data } = await api.get("api/jobs");
+const { data } = await api.get(`/api/tags/${route.params.slug}/jobs`);
 jobs.value = data.data;
 pagination.last_page = data.meta.last_page;
 
 const loadMore = (page) => {
-  loading.value = true;
-  api.get(`/api/jobs?page=${page}`).then(({ data }) => {
-    jobs.value = jobs.value.concat(data.data);
-    pagination.last_page = data.meta.last_page;
-    loading.value = false;
-  });
+  api
+    .get(`/api/tags/${route.params.slug}/jobs&page=${page}`)
+    .then(({ data }) => {
+      jobs.value = jobs.value.concat(data.data);
+      pagination.last_page = data.meta.last_page;
+      pagination.page = page + 1;
+    });
 };
 
+// use intersection observer
 useIntersectionObserver(target, ([{ isIntersecting }]) => {
   if (isIntersecting && pagination.page <= pagination.last_page) {
-    pagination.page++;
     loadMore(pagination.page);
   }
 });

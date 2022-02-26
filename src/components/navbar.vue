@@ -7,7 +7,9 @@
     </h2>
 
     <nav v-if="auth.loggedIn" class="flex items-center gap-4">
-      <a class="text-base" href="#">My posts</a>
+      <router-link class="text-base" :to="{ name: 'jobs-mine' }">
+        My posts
+      </router-link>
       <router-link class="text-base button" :to="{ name: 'jobs-create' }">
         <svg
           xmlns="http://www.w3.org/2000/svg"

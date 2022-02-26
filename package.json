@@ -14,11 +14,15 @@
     "@vueuse/core": "^7.6.2",
     "apisauce": "^2.1.5",
     "filepond": "^4.30.3",
+    "install": "^0.13.0",
+    "npm": "^8.5.2",
     "pinia": "^2.0.11",
     "vue": "^3.2.25",
     "vue-filepond": "^7.0.2",
+    "vue-loading-overlay": "^5.0.3",
     "vue-multiselect": "^3.0.0-alpha.2",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue-spinner": "^1.0.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.2",
